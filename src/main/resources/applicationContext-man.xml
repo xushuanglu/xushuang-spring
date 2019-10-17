@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 第1种依赖注入的方式：setter注入-->
+	<bean id="m1" class="com.lulu.Man" >
+		<property name="id" value="2"/>
+		<property name="name" value="xiaolu"/>
+		<property name="hobby" value="男"/>
+		<property name="dog" ref="d1"/>
+	</bean>
+	
+	<!-- dog对象 -->
+	<bean id="d1" class="com.lulu.Dog">
+		<property name="id" value="001"/>
+		<property name="name" value="旺财"/>
+		<property name="sex" value="公"/>
+	</bean>
+	
+	<!-- 第2种依赖注入的方式：构造器注入 -->
+	<bean id="m2" class="com.lulu.Man">
+		<constructor-arg index="0"  value="8888"/>
+		<constructor-arg index="1"  value="heihei"/>
+		<constructor-arg index="2"  value="足球"/>
+		<constructor-arg index="3" ref="d1"/>
+	</bean>
+	
+	<!-- 第3种依赖注入的方式：p命名空间注入 -->
+	<bean id="m3" class="com.lulu.Man" p:id="12" p:name="xiaolu" p:hobby="篮球"/>
+	
+	<!-- 第4种依赖注入的方式：spel注入 -->
+	<bean id="m4" class="com.lulu.Man" >
+		<property name="id" value="#{m1.id}"/>
+		<property name="name" value="#{m1.name}"/>
+		<property name="hobby" value="#{m1.hobby}"/>
+	</bean>
+
+</beans>
